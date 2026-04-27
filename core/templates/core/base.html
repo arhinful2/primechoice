@@ -27,11 +27,20 @@
     <header class="site-header">
         <div class="container header-inner">
             <a class="brand" href="{% url 'home' %}">
-                {% if site.logo %}
-                    <img src="{{ site.logo.url }}" alt="{{ site.school_name }} logo">
-                {% else %}
-                    <span class="brand-mark">PC</span>
-                {% endif %}
+                <span class="brand-media">
+                    {% if site.logo %}
+                        <img
+                            class="brand-logo"
+                            src="{{ site.logo.url }}"
+                            alt="{{ site.school_name }} logo"
+                            loading="eager"
+                            decoding="async"
+                            fetchpriority="high"
+                            onerror="this.style.display='none';const fallback=this.parentElement.querySelector('.brand-mark');if(fallback){fallback.style.display='inline-flex';}"
+                        >
+                    {% endif %}
+                    <span class="brand-mark{% if site.logo %} is-fallback{% endif %}">PC</span>
+                </span>
                 <span>
                     <strong>{{ site.school_name|default:'Prime Choice Kids Care' }}</strong>
                     <small>{{ site.tagline }}</small>
@@ -78,42 +87,50 @@
                 <div class="social-links">
                     {% if site.facebook %}
                         <a class="social-link" href="{{ site.facebook }}" target="_blank" rel="noopener" aria-label="Follow us on Facebook" data-track-action="social" data-track-label="Facebook">
-                            <img class="social-icon-img" src="{% static 'images/social/facebook.svg' %}" alt="Facebook">
+                            <img class="social-icon-img" src="{% static 'images/social/facebook.svg' %}" alt="Facebook" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('icon-fallback');">
+                            <span class="social-fallback" aria-hidden="true">Fb</span>
                         </a>
                     {% endif %}
                     {% if site.instagram %}
                         <a class="social-link" href="{{ site.instagram }}" target="_blank" rel="noopener" aria-label="Follow us on Instagram" data-track-action="social" data-track-label="Instagram">
-                            <img class="social-icon-img" src="{% static 'images/social/instagram.svg' %}" alt="Instagram">
+                            <img class="social-icon-img" src="{% static 'images/social/instagram.svg' %}" alt="Instagram" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('icon-fallback');">
+                            <span class="social-fallback" aria-hidden="true">Ig</span>
                         </a>
                     {% endif %}
                     {% if site.youtube %}
                         <a class="social-link" href="{{ site.youtube }}" target="_blank" rel="noopener" aria-label="Subscribe on YouTube" data-track-action="social" data-track-label="YouTube">
-                            <img class="social-icon-img" src="{% static 'images/social/youtube.svg' %}" alt="YouTube">
+                            <img class="social-icon-img" src="{% static 'images/social/youtube.svg' %}" alt="YouTube" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('icon-fallback');">
+                            <span class="social-fallback" aria-hidden="true">Yt</span>
                         </a>
                     {% endif %}
                     {% if site.tiktok %}
                         <a class="social-link" href="{{ site.tiktok }}" target="_blank" rel="noopener" aria-label="Follow us on TikTok" data-track-action="social" data-track-label="TikTok">
-                            <img class="social-icon-img" src="{% static 'images/social/tiktok.svg' %}" alt="TikTok">
+                            <img class="social-icon-img" src="{% static 'images/social/tiktok.svg' %}" alt="TikTok" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('icon-fallback');">
+                            <span class="social-fallback" aria-hidden="true">Tk</span>
                         </a>
                     {% endif %}
                     {% if site.linkedin %}
                         <a class="social-link" href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="Follow us on LinkedIn" data-track-action="social" data-track-label="LinkedIn">
-                            <img class="social-icon-img" src="{% static 'images/social/linkedin.svg' %}" alt="LinkedIn">
+                            <img class="social-icon-img" src="{% static 'images/social/linkedin.svg' %}" alt="LinkedIn" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('icon-fallback');">
+                            <span class="social-fallback" aria-hidden="true">In</span>
                         </a>
                     {% endif %}
                     {% if site.twitter %}
                         <a class="social-link" href="{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Follow us on Twitter" data-track-action="social" data-track-label="Twitter">
-                            <img class="social-icon-img" src="{% static 'images/social/twitter.svg' %}" alt="Twitter">
+                            <img class="social-icon-img" src="{% static 'images/social/twitter.svg' %}" alt="Twitter" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('icon-fallback');">
+                            <span class="social-fallback" aria-hidden="true">Tw</span>
                         </a>
                     {% endif %}
                     {% if site.pinterest %}
                         <a class="social-link" href="{{ site.pinterest }}" target="_blank" rel="noopener" aria-label="Follow us on Pinterest" data-track-action="social" data-track-label="Pinterest">
-                            <img class="social-icon-img" src="{% static 'images/social/pinterest.svg' %}" alt="Pinterest">
+                            <img class="social-icon-img" src="{% static 'images/social/pinterest.svg' %}" alt="Pinterest" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('icon-fallback');">
+                            <span class="social-fallback" aria-hidden="true">Pt</span>
                         </a>
                     {% endif %}
                     {% if site.whatsapp_url %}
                         <a class="social-link" href="{{ site.whatsapp_url }}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-track-action="whatsapp" data-track-label="Footer WhatsApp">
-                            <img class="social-icon-img" src="{% static 'images/social/whatsapp.svg' %}" alt="WhatsApp">
+                            <img class="social-icon-img" src="{% static 'images/social/whatsapp.svg' %}" alt="WhatsApp" loading="lazy" decoding="async" onerror="this.style.display='none';this.parentElement.classList.add('icon-fallback');">
+                            <span class="social-fallback" aria-hidden="true">Wa</span>
                         </a>
                     {% endif %}
                 </div>

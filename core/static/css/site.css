@@ -135,7 +135,15 @@ img {
     min-width: 0;
 }
 
-.brand img {
+.brand-media {
+    position: relative;
+    width: 54px;
+    height: 54px;
+    flex: 0 0 auto;
+}
+
+.brand img,
+.brand-logo {
     width: 54px;
     height: 54px;
     object-fit: cover;
@@ -155,6 +163,10 @@ img {
     font-weight: 800;
     letter-spacing: 0.08em;
     box-shadow: var(--shadow);
+}
+
+.brand-mark.is-fallback {
+    display: none;
 }
 
 .brand strong {
@@ -808,6 +820,7 @@ img {
     font-size: 0.78rem;
     font-weight: 800;
     background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
 }
 
 .social-link .social-icon-img {
@@ -815,6 +828,17 @@ img {
     height: 18px;
     object-fit: contain;
     display: block;
+}
+
+.social-fallback {
+    display: none;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+}
+
+.social-link.icon-fallback .social-fallback {
+    display: inline;
 }
 
 .social-link:hover {
@@ -878,6 +902,36 @@ img {
         align-items: flex-start;
     }
 
+    .brand {
+        width: calc(100% - 84px);
+    }
+
+    .brand strong {
+        font-size: 0.96rem;
+        line-height: 1.15;
+    }
+
+    .brand small {
+        font-size: 0.78rem;
+    }
+
+    .social-links {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 38px));
+        gap: 10px;
+        justify-content: start;
+    }
+
+    .content-card img,
+    .gallery-card img {
+        height: 210px;
+    }
+
+    .hero-card,
+    .hero-placeholder {
+        min-height: 320px;
+    }
+
     .footer-bottom {
         flex-direction: column;
     }
@@ -891,6 +945,77 @@ img {
         min-height: 42px;
         font-size: 0.92rem;
         padding: 9px 14px;
+    }
+}
+
+@media (max-width: 560px) {
+    .container {
+        width: min(1180px, calc(100% - 20px));
+    }
+
+    .header-inner {
+        min-height: 74px;
+        gap: 12px;
+    }
+
+    .brand {
+        gap: 10px;
+    }
+
+    .brand-media,
+    .brand img,
+    .brand-logo,
+    .brand-mark {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+    }
+
+    .nav-toggle {
+        padding: 8px 12px;
+        font-size: 0.84rem;
+    }
+
+    .site-nav a {
+        width: 100%;
+        text-align: left;
+        padding: 10px 12px;
+        border-radius: 12px;
+    }
+
+    .hero-section,
+    .page-hero {
+        padding: 42px 0 26px;
+    }
+
+    .hero-copy h1,
+    .page-hero h1 {
+        line-height: 1.04;
+    }
+
+    .hero-actions,
+    .contact-pills {
+        gap: 10px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .contact-pills a {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .content-card img,
+    .gallery-card img,
+    .staff-photo {
+        height: 190px;
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
     }
 }
 
