@@ -7,7 +7,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv(
     'SECRET_KEY', 'django-insecure-REPLACE-WITH-YOUR-OWN-SECRET-KEY')
 
-DEBUG = os.getenv('DEBUG', 'True').lower() in ['true', '1', 'yes']
+# Default DEBUG to False on Vercel, True locally unless explicitly set.
+_is_vercel_runtime = bool(os.getenv('VERCEL'))
+_debug_default = 'False' if _is_vercel_runtime else 'True'
+DEBUG = os.getenv('DEBUG', _debug_default).lower() in ['true', '1', 'yes']
 
 _env_allowed = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1')
 # Split, strip and ignore empty entries
@@ -102,6 +105,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+_blob_token = os.getenv('BLOB_READ_WRITE_TOKEN', '').strip()
+_blob_base_url = os.getenv('BLOB_BASE_URL', '').strip().rstrip('/')
+if _blob_token:
+    STORAGES = {
+        'default': {
+            'BACKEND': 'core.storage_backends.VercelBlobStorage',
+        },
+        'staticfiles': {
+            'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
+        },
+    }
+    if _blob_base_url:
+        MEDIA_URL = f'{_blob_base_url}/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
