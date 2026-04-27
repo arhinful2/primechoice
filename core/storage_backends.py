@@ -31,6 +31,8 @@ class VercelBlobStorage(Storage):
 
     def _blob_url(self, name: str) -> str:
         normalized_name = self._normalize_name(name)
+        if normalized_name.startswith(("http://", "https://")):
+            return normalized_name
         if self.base_url:
             return f"{self.base_url}/{normalized_name}"
         return normalized_name
@@ -61,7 +63,7 @@ class VercelBlobStorage(Storage):
 
         result = blob_put(normalized_name, payload,
                           options=options, multipart=True)
-        return result["pathname"]
+        return result.get("url", result["pathname"])
 
     def delete(self, name):
         try:
@@ -83,6 +85,8 @@ class VercelBlobStorage(Storage):
 
     def url(self, name):
         normalized_name = self._normalize_name(name)
+        if normalized_name.startswith(("http://", "https://")):
+            return normalized_name
         if self.base_url:
             return f"{self.base_url}/{normalized_name}"
 

@@ -6,9 +6,9 @@ from ckeditor.fields import RichTextField
 class SiteSettings(models.Model):
     school_name = models.CharField(max_length=200, default="Prime Choice Kids Care", blank=True)
     tagline = models.CharField(max_length=300, default="Join us and be part of shaping young minds!", blank=True)
-    logo = models.ImageField(upload_to='site/', blank=True, null=True)
-    favicon = models.ImageField(upload_to='site/', blank=True, null=True)
-    hero_image = models.ImageField(upload_to='site/', blank=True, null=True)
+    logo = models.ImageField(upload_to='site/', max_length=500, blank=True, null=True)
+    favicon = models.ImageField(upload_to='site/', max_length=500, blank=True, null=True)
+    hero_image = models.ImageField(upload_to='site/', max_length=500, blank=True, null=True)
     hero_title = models.CharField(max_length=200, default='Welcome to Prime Choice Kids Care', blank=True)
     hero_text = RichTextField(blank=True, default='')
     about_title = models.CharField(max_length=200, default='About Us', blank=True)
@@ -70,7 +70,7 @@ class StaffMember(models.Model):
     name = models.CharField(max_length=120, blank=True, default='')
     role = models.CharField(max_length=120, blank=True, default='', help_text='Job title or position (e.g., Principal, Teacher, Caregiver)')
     bio = models.TextField(blank=True, default='', help_text='Short biography or description')
-    photo = models.ImageField(upload_to='staff/', blank=True, null=True)
+    photo = models.ImageField(upload_to='staff/', max_length=500, blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
@@ -85,7 +85,7 @@ class Testimonial(models.Model):
     name = models.CharField(max_length=120, blank=True, default='')
     role = models.CharField(max_length=120, blank=True, default='')
     quote = models.TextField(blank=True, default='')
-    avatar = models.ImageField(upload_to='testimonials/', blank=True, null=True)
+    avatar = models.ImageField(upload_to='testimonials/', max_length=500, blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
@@ -98,7 +98,7 @@ class Testimonial(models.Model):
 
 class GalleryImage(models.Model):
     title = models.CharField(max_length=150, blank=True, default='')
-    image = models.ImageField(upload_to='gallery/', blank=True, null=True)
+    image = models.ImageField(upload_to='gallery/', max_length=500, blank=True, null=True)
     caption = models.CharField(max_length=255, blank=True, default='')
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
@@ -189,7 +189,7 @@ class Program(models.Model):
     title = models.CharField(max_length=100, blank=True, default='')
     age_group = models.CharField(max_length=50, blank=True, default='')
     description = RichTextField(blank=True, default='')
-    image = models.ImageField(upload_to='programs/', blank=True, null=True)
+    image = models.ImageField(upload_to='programs/', max_length=500, blank=True, null=True)
     order = models.IntegerField(default=0)
     featured = models.BooleanField(default=False)
 
