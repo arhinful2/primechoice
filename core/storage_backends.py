@@ -23,7 +23,8 @@ class VercelBlobStorage(Storage):
         self.access = os.getenv("BLOB_ACCESS", "public")
 
         if not self.token:
-            raise ValueError("BLOB_READ_WRITE_TOKEN is required for VercelBlobStorage")
+            raise ValueError(
+                "BLOB_READ_WRITE_TOKEN is required for VercelBlobStorage")
 
     def _normalize_name(self, name: str) -> str:
         return name.replace("\\", "/").lstrip("/")
@@ -58,7 +59,8 @@ class VercelBlobStorage(Storage):
             "allowOverwrite": True,
         }
 
-        result = blob_put(normalized_name, payload, options=options, multipart=True)
+        result = blob_put(normalized_name, payload,
+                          options=options, multipart=True)
         return result["pathname"]
 
     def delete(self, name):
