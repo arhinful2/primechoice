@@ -4,7 +4,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Support reading from environment variables (for Vercel/production)
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-REPLACE-WITH-YOUR-OWN-SECRET-KEY')
+SECRET_KEY = os.getenv(
+    'SECRET_KEY', 'django-insecure-REPLACE-WITH-YOUR-OWN-SECRET-KEY')
 
 DEBUG = os.getenv('DEBUG', 'True').lower() in ['true', '1', 'yes']
 
