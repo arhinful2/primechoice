@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ site.school_name }} | Careers{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <span class="eyebrow">Careers</span>
+        <h1>Join the school team</h1>
+        <p>Vacancies, qualifications, and contact numbers are all editable from the admin portal.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container card-grid">
+        {% for vacancy in vacancies %}
+            <article class="content-card">
+                <div>
+                    <h2>{{ vacancy.title }}</h2>
+                    <div class="richtext">{{ vacancy.qualifications|safe }}</div>
+                    <div class="contact-pills">
+                        <a href="tel:{{ site.phone1 }}">Apply: {{ site.phone1 }}</a>
+                        {% if site.phone2 %}<a href="tel:{{ site.phone2 }}">Apply: {{ site.phone2 }}</a>{% endif %}
+                    </div>
+                </div>
+            </article>
+        {% empty %}
+            <div class="panel empty-state">
+                <h3>No active vacancies right now</h3>
+                <p>Publish the flyer roles from the admin panel when recruitment opens again.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

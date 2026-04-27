@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ site.school_name }} | Programs{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <span class="eyebrow">Programs</span>
+        <h1>Crèche, preschool, and lower primary</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container card-grid">
+        {% for program in programs %}
+            <article class="content-card">
+                {% if program.image %}<img src="{{ program.image.url }}" alt="{{ program.title }}">{% endif %}
+                <div>
+                    <h2>{{ program.title }}</h2>
+                    <p class="muted">{{ program.age_group }}</p>
+                    <div class="richtext">{{ program.description|safe }}</div>
+                </div>
+            </article>
+        {% empty %}
+            <div class="panel empty-state">
+                <h3>No programs yet</h3>
+                <p>Create your program cards in the admin dashboard.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

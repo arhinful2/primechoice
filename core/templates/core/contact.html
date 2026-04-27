@@ -1,0 +1,132 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ site.school_name }} | Contact{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <span class="eyebrow">Get in Touch</span>
+        <h1>{{ site.contact_title|default:'Contact Us' }}</h1>
+        <p class="hero-subtitle">{{ site.contact_intro|safe }}</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container two-column">
+        <!-- Contact Form -->
+        <article class="panel contact-card">
+            <h2>Send a message</h2>
+            <p class="contact-card-desc">Have a question? We'd love to hear from you. Fill out the form below and we'll get back to you shortly.</p>
+            <form method="post" class="contact-form">
+                {% csrf_token %}
+                <label>
+                    Name
+                    <input type="text" name="name" placeholder="Your full name" required>
+                </label>
+                <label>
+                    Email
+                    <input type="email" name="email" placeholder="your@email.com" required>
+                </label>
+                <label>
+                    Phone
+                    <input type="text" name="phone" placeholder="Phone number">
+                </label>
+                <label>
+                    Message
+                    <textarea name="message" rows="5" placeholder="Tell us more about your inquiry..." required></textarea>
+                </label>
+                <button type="submit" class="btn btn-primary">Send message</button>
+            </form>
+        </article>
+
+        <!-- Contact Info + Social -->
+        <article class="panel contact-card">
+            <h2>Contact information</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>Location</h3>
+                    <p>{{ site.location }}</p>
+                </div>
+                {% if site.opening_hours %}
+                    <div class="contact-item">
+                        <h3>Opening Hours</h3>
+                        <p>{{ site.opening_hours }}</p>
+                    </div>
+                {% endif %}
+                <div class="contact-item">
+                    <h3>Phone</h3>
+                    <p>
+                        <a href="tel:{{ site.phone1 }}">{{ site.phone1 }}</a>
+                        {% if site.phone2 %}<br><a href="tel:{{ site.phone2 }}">{{ site.phone2 }}</a>{% endif %}
+                    </p>
+                </div>
+                <div class="contact-item">
+                    <h3>Email</h3>
+                    <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+                </div>
+            </div>
+            {% if site.map_embed_code %}
+                <div class="map-frame">{{ site.map_embed_code|safe }}</div>
+            {% endif %}
+
+            <!-- Social Media -->
+            {% if site.facebook or site.instagram or site.youtube or site.tiktok or site.linkedin or site.twitter or site.pinterest or site.whatsapp_url %}
+                <div class="contact-social-section">
+                    <h3>Follow us</h3>
+                    <div class="contact-social-grid">
+                        {% if site.facebook %}
+                            <a class="contact-social-btn" href="{{ site.facebook }}" target="_blank" rel="noopener" aria-label="Facebook" data-track-action="social" data-track-label="Contact Facebook">
+                                <img class="social-icon-img" src="{% static 'images/social/facebook.svg' %}" alt="Facebook">
+                                <span>Facebook</span>
+                            </a>
+                        {% endif %}
+                        {% if site.instagram %}
+                            <a class="contact-social-btn" href="{{ site.instagram }}" target="_blank" rel="noopener" aria-label="Instagram" data-track-action="social" data-track-label="Contact Instagram">
+                                <img class="social-icon-img" src="{% static 'images/social/instagram.svg' %}" alt="Instagram">
+                                <span>Instagram</span>
+                            </a>
+                        {% endif %}
+                        {% if site.youtube %}
+                            <a class="contact-social-btn" href="{{ site.youtube }}" target="_blank" rel="noopener" aria-label="YouTube" data-track-action="social" data-track-label="Contact YouTube">
+                                <img class="social-icon-img" src="{% static 'images/social/youtube.svg' %}" alt="YouTube">
+                                <span>YouTube</span>
+                            </a>
+                        {% endif %}
+                        {% if site.tiktok %}
+                            <a class="contact-social-btn" href="{{ site.tiktok }}" target="_blank" rel="noopener" aria-label="TikTok" data-track-action="social" data-track-label="Contact TikTok">
+                                <img class="social-icon-img" src="{% static 'images/social/tiktok.svg' %}" alt="TikTok">
+                                <span>TikTok</span>
+                            </a>
+                        {% endif %}
+                        {% if site.linkedin %}
+                            <a class="contact-social-btn" href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn" data-track-action="social" data-track-label="Contact LinkedIn">
+                                <img class="social-icon-img" src="{% static 'images/social/linkedin.svg' %}" alt="LinkedIn">
+                                <span>LinkedIn</span>
+                            </a>
+                        {% endif %}
+                        {% if site.twitter %}
+                            <a class="contact-social-btn" href="{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Twitter" data-track-action="social" data-track-label="Contact Twitter">
+                                <img class="social-icon-img" src="{% static 'images/social/twitter.svg' %}" alt="Twitter">
+                                <span>Twitter</span>
+                            </a>
+                        {% endif %}
+                        {% if site.pinterest %}
+                            <a class="contact-social-btn" href="{{ site.pinterest }}" target="_blank" rel="noopener" aria-label="Pinterest" data-track-action="social" data-track-label="Contact Pinterest">
+                                <img class="social-icon-img" src="{% static 'images/social/pinterest.svg' %}" alt="Pinterest">
+                                <span>Pinterest</span>
+                            </a>
+                        {% endif %}
+                        {% if site.whatsapp_url %}
+                            <a class="contact-social-btn" href="{{ site.whatsapp_url }}" target="_blank" rel="noopener" aria-label="WhatsApp" data-track-action="whatsapp" data-track-label="Contact WhatsApp">
+                                <img class="social-icon-img" src="{% static 'images/social/whatsapp.svg' %}" alt="WhatsApp">
+                                <span>WhatsApp</span>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </article>
+    </div>
+</section>
+{% endblock %}

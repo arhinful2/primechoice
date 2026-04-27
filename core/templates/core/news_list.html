@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ site.school_name }} | News{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <span class="eyebrow">News and Events</span>
+        <h1>Latest school updates</h1>
+        <p>Stay informed about admissions, orientations, school activities, and important announcements.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container card-grid three-up">
+        {% for item in news_items %}
+            <article class="content-card news-card">
+                <div>
+                    <p class="muted news-meta">
+                        {% if item.date %}{{ item.date }}{% else %}Upcoming{% endif %}
+                        {% if item.location %} - {{ item.location }}{% endif %}
+                    </p>
+                    <h2><a href="{% url 'news_detail' item.slug %}" data-track-action="cta" data-track-label="News List Title">{{ item.title }}</a></h2>
+                    <p>{{ item.summary|truncatechars:190 }}</p>
+                    <a href="{% url 'news_detail' item.slug %}" data-track-action="cta" data-track-label="News List Read More">Read full details</a>
+                </div>
+            </article>
+        {% empty %}
+            <div class="panel empty-state">
+                <h3>No updates published yet</h3>
+                <p>Add items under News Events in admin to show updates here.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

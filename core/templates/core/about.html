@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ site.school_name }} | About{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <span class="eyebrow">About the school</span>
+        <h1>{{ site.about_title|default:'About Us' }}</h1>
+        <p>{{ site.tagline }}</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container two-column">
+        <article class="panel richtext">{{ site.about_us|safe }}</article>
+        <article class="panel richtext">
+            <h2>{{ site.mission_title|default:'Mission' }}</h2>
+            {{ site.mission_text|safe }}
+            <h2>{{ site.vision_title|default:'Vision' }}</h2>
+            {{ site.vision_text|safe }}
+        </article>
+    </div>
+</section>
+
+{% if staff_members %}
+<section class="section">
+    <div class="container">
+        <div class="section-head">
+            <h2>Our Team</h2>
+            <p>Meet our dedicated educators and staff members</p>
+        </div>
+        <div class="staff-grid">
+            {% for staff in staff_members %}
+                <article class="staff-card">
+                    {% if staff.photo %}
+                        <img src="{{ staff.photo.url }}" alt="{{ staff.name }}" class="staff-photo">
+                    {% else %}
+                        <div class="staff-photo-placeholder">
+                            <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                    {% endif %}
+                    <div class="staff-info">
+                        <h3>{{ staff.name }}</h3>
+                        <p class="staff-role">{{ staff.role }}</p>
+                        {% if staff.bio %}
+                            <p class="staff-bio">{{ staff.bio }}</p>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

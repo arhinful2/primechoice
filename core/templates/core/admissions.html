@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ site.school_name }} | Admissions{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <span class="eyebrow">Admissions</span>
+        <h1>{{ site.admissions_title|default:'Admissions' }}</h1>
+        <p>Keep admission text, requirements, and contact details in the admin panel so the office can update them anytime.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container two-column">
+        <article class="panel richtext">
+            <h2>Overview</h2>
+            {{ site.admissions_overview|safe }}
+        </article>
+        <article class="panel richtext">
+            <h2>What to prepare</h2>
+            {{ site.admissions_requirements|safe }}
+            <div class="cta-strip">
+                <a class="btn btn-primary" href="tel:{{ site.phone1 }}">Call {{ site.phone1 }}</a>
+                {% if site.phone2 %}<a class="btn btn-secondary" href="tel:{{ site.phone2 }}">Call {{ site.phone2 }}</a>{% endif %}
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,191 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ site.school_name }} | Home{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <span class="eyebrow">Early learning with care</span>
+            <h1>{{ site.hero_title|default:site.tagline }}</h1>
+            <div class="richtext">{{ site.hero_text|safe }}</div>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="{% url 'contact' %}" data-track-action="cta" data-track-label="Hero Apply Now">Apply Now</a>
+                <a class="btn btn-secondary" href="{% url 'programs' %}" data-track-action="cta" data-track-label="Hero View Programs">View Programs</a>
+            </div>
+            <div class="contact-pills">
+                <a href="tel:{{ site.phone1 }}" data-track-action="call" data-track-label="Hero Call Phone 1">Call {{ site.phone1 }}</a>
+                {% if site.phone2 %}<a href="tel:{{ site.phone2 }}" data-track-action="call" data-track-label="Hero Call Phone 2">Call {{ site.phone2 }}</a>{% endif %}
+            </div>
+        </div>
+        <div class="hero-card">
+            {% if site.hero_image %}
+                <img src="{{ site.hero_image.url }}" alt="{{ site.school_name }} hero image">
+            {% else %}
+                <div class="hero-placeholder">
+                    <h3>Shaping young minds with warmth and structure</h3>
+                    <p>Crèche, preschool, and lower primary programs presented in one professional school website.</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="section stat-section">
+    <div class="container stat-grid">
+        {% for stat in stats %}
+            <article class="stat-card">
+                <h3>
+                    <span class="counter-number" data-counter-value="{{ stat.value }}">0</span>{{ stat.suffix }}
+                </h3>
+                <p>{{ stat.label }}</p>
+            </article>
+        {% empty %}
+            <article class="stat-card">
+                <h3><span class="counter-number" data-counter-value="12">0</span>+</h3>
+                <p>Qualified team members</p>
+            </article>
+            <article class="stat-card">
+                <h3><span class="counter-number" data-counter-value="3">0</span></h3>
+                <p>Learning levels (Crèche to Lower Primary)</p>
+            </article>
+            <article class="stat-card">
+                <h3><span class="counter-number" data-counter-value="5">0</span> days</h3>
+                <p>Weekly child care and learning</p>
+            </article>
+            <article class="stat-card">
+                <h3><span class="counter-number" data-counter-value="100">0</span>%</h3>
+                <p>Focus on child safety and growth</p>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-head">
+        <span class="eyebrow">Why parents choose us</span>
+        <h2>{{ site.about_title|default:'About Us' }}</h2>
+    </div>
+    <div class="container two-column">
+        <article class="panel richtext">{{ site.about_us|safe }}</article>
+        <article class="panel richtext">{{ site.why_choose_us|safe }}</article>
+    </div>
+</section>
+
+<section class="section alt-section">
+    <div class="container section-head">
+        <span class="eyebrow">Latest updates</span>
+        <h2>News and events</h2>
+        <p><a class="btn btn-secondary" href="{% url 'news_list' %}" data-track-action="cta" data-track-label="Home View All News">View all news</a></p>
+    </div>
+    <div class="container card-grid three-up">
+        {% for item in latest_news %}
+            <article class="content-card news-card">
+                <div>
+                    <p class="muted news-meta">
+                        {% if item.date %}{{ item.date }}{% else %}Upcoming{% endif %}
+                        {% if item.location %} - {{ item.location }}{% endif %}
+                    </p>
+                    <h3><a href="{% url 'news_detail' item.slug %}" data-track-action="cta" data-track-label="News Card Title">{{ item.title }}</a></h3>
+                    <p>{{ item.summary }}</p>
+                    {% if item.cta_url and item.cta_text %}
+                        <a class="btn btn-secondary" href="{{ item.cta_url }}" data-track-action="cta" data-track-label="News Card CTA">{{ item.cta_text }}</a>
+                    {% endif %}
+                    <p><a href="{% url 'news_detail' item.slug %}" data-track-action="cta" data-track-label="News Read More">Read full update</a></p>
+                </div>
+            </article>
+        {% empty %}
+            <div class="panel empty-state">
+                <p>Create news and events in the admin panel to keep the homepage fresh.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section alt-section">
+    <div class="container section-head">
+        <span class="eyebrow">Programs</span>
+        <h2>Learning stages built for growth</h2>
+    </div>
+    <div class="container card-grid">
+        {% for program in programs %}
+            <article class="content-card">
+                {% if program.image %}<img src="{{ program.image.url }}" alt="{{ program.title }}">{% endif %}
+                <div>
+                    <h3>{{ program.title }}</h3>
+                    <p class="muted">{{ program.age_group }}</p>
+                    <div class="richtext">{{ program.description|safe }}</div>
+                </div>
+            </article>
+        {% empty %}
+            <div class="content-card empty-state">
+                <h3>No programs published yet</h3>
+                <p>Add crèche, preschool, and lower primary programs from the admin panel.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-head">
+        <span class="eyebrow">Latest vacancy</span>
+        <h2>Careers and recruitment</h2>
+    </div>
+    <div class="container panel spotlight">
+        {% if featured_vacancy %}
+            <h3>{{ featured_vacancy.title }}</h3>
+            <div class="richtext">{{ featured_vacancy.qualifications|safe }}</div>
+            <a class="btn btn-primary" href="{% url 'careers' %}" data-track-action="cta" data-track-label="Vacancy See All">See all vacancies</a>
+        {% else %}
+            <h3>Recruitment updates appear here</h3>
+            <p>Publish vacancies from the admin portal so parents and applicants can see the latest openings.</p>
+        {% endif %}
+    </div>
+</section>
+
+<section class="section alt-section">
+    <div class="container section-head">
+        <span class="eyebrow">Testimonials</span>
+        <h2>What families can see about the school</h2>
+    </div>
+    <div class="container card-grid two-up">
+        {% for testimonial in testimonials %}
+            <article class="quote-card">
+                <div class="quote-head">
+                    {% if testimonial.avatar %}
+                        <img class="quote-avatar" src="{{ testimonial.avatar.url }}" alt="{{ testimonial.name }}">
+                    {% endif %}
+                    <div>
+                        <strong>{{ testimonial.name }}</strong>
+                        <span>{{ testimonial.role }}</span>
+                    </div>
+                </div>
+                <p>“{{ testimonial.quote }}”</p>
+            </article>
+        {% empty %}
+            <div class="quote-card empty-state">
+                <p>Add testimonials in the admin panel to build trust with parents.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="container section-head">
+        <span class="eyebrow">Gallery</span>
+        <h2>School life in photos</h2>
+    </div>
+    <div class="container gallery-grid">
+        {% for image in gallery_images %}
+            <figure class="gallery-card">
+                {% if image.image %}<img src="{{ image.image.url }}" alt="{{ image.title }}">{% endif %}
+                {% if image.caption %}<figcaption>{{ image.caption }}</figcaption>{% endif %}
+            </figure>
+        {% empty %}
+            <div class="panel empty-state">
+                <p>Upload gallery images from the admin panel to make the site feel more alive.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

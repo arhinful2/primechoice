@@ -1,0 +1,22 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n admin_urls %}
+
+{% block content %}
+<div class="module">
+    <h1>Reply to contact message</h1>
+    <p><strong>Name:</strong> {{ message.name }}</p>
+    <p><strong>Email:</strong> {{ message.email }}</p>
+    <p><strong>Phone:</strong> {{ message.phone|default:'Not provided' }}</p>
+    <p><strong>Message:</strong></p>
+    <div style="padding: 12px; background: #f8f8f8; border-radius: 8px; margin-bottom: 20px;">{{ message.message }}</div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="submit-row">
+            <input type="submit" value="Send Reply" class="default" />
+            <a href="{% url 'admin:core_contactmessage_changelist' %}" class="button cancel-link">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

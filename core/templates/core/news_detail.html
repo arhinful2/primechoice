@@ -1,0 +1,44 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ item.title }} | {{ site.school_name }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container narrow">
+        <span class="eyebrow">News detail</span>
+        <h1>{{ item.title }}</h1>
+        <p>
+            {% if item.date %}{{ item.date }}{% endif %}
+            {% if item.location %} - {{ item.location }}{% endif %}
+        </p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container two-column">
+        <article class="panel">
+            <div class="richtext">
+                <p>{{ item.summary }}</p>
+            </div>
+            {% if item.cta_url and item.cta_text %}
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="{{ item.cta_url }}" data-track-action="cta" data-track-label="News Detail CTA">{{ item.cta_text }}</a>
+                </div>
+            {% endif %}
+        </article>
+        <aside class="panel">
+            <h2>More updates</h2>
+            {% for related in related_news %}
+                <p>
+                    <a href="{% url 'news_detail' related.slug %}" data-track-action="cta" data-track-label="News Detail Related Link">{{ related.title }}</a>
+                </p>
+            {% empty %}
+                <p>No additional updates yet.</p>
+            {% endfor %}
+            <div class="hero-actions">
+                <a class="btn btn-secondary" href="{% url 'news_list' %}" data-track-action="cta" data-track-label="Back to News List">Back to all updates</a>
+            </div>
+        </aside>
+    </div>
+</section>
+{% endblock %}

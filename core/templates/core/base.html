@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ site.school_name }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ site.tagline|default:'Prime Choice Kids Care' }}{% endblock %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVJkEZSMUkrQ6usKu8zIstOWilVQjwGrQ6BUAA6I/35dNdlvsoPvB8EdxkzG6RJ6ztzrHmPD/Cw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    {% if site.favicon %}
+        <link rel="icon" href="{{ site.favicon.url }}">
+    {% endif %}
+</head>
+<body class="is-loading">
+<div class="page-loader" data-page-loader aria-hidden="true">
+    <div class="loader-core">
+        <span class="loader-dot"></span>
+        <h2>{{ site.school_name|default:'Prime Choice Kids Care' }}</h2>
+        <p>Preparing your experience...</p>
+    </div>
+</div>
+<div class="site-shell">
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="{% url 'home' %}">
+                {% if site.logo %}
+                    <img src="{{ site.logo.url }}" alt="{{ site.school_name }} logo">
+                {% else %}
+                    <span class="brand-mark">PC</span>
+                {% endif %}
+                <span>
+                    <strong>{{ site.school_name|default:'Prime Choice Kids Care' }}</strong>
+                    <small>{{ site.tagline }}</small>
+                </span>
+            </a>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" data-nav-toggle>Menu</button>
+            <nav class="site-nav" data-site-nav>
+                <a href="{% url 'home' %}" data-track-action="nav" data-track-label="Nav Home">Home</a>
+                <a href="{% url 'about' %}" data-track-action="nav" data-track-label="Nav About">About</a>
+                <a href="{% url 'programs' %}" data-track-action="nav" data-track-label="Nav Programs">Programs</a>
+                <a href="{% url 'admissions' %}" data-track-action="nav" data-track-label="Nav Admissions">Admissions</a>
+                <a href="{% url 'careers' %}" data-track-action="nav" data-track-label="Nav Careers">Careers</a>
+                <a href="{% url 'news_list' %}" data-track-action="nav" data-track-label="Nav News">News</a>
+                <a href="{% url 'contact' %}" data-track-action="nav" data-track-label="Nav Contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <h3>{{ site.school_name|default:'Prime Choice Kids Care' }}</h3>
+                <p>{{ site.footer_text|default:site.tagline }}</p>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <p><a href="tel:{{ site.phone1 }}">{{ site.phone1 }}</a>{% if site.phone2 %} / <a href="tel:{{ site.phone2 }}">{{ site.phone2 }}</a>{% endif %}</p>
+                <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+                <p>{{ site.location }}</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <p><a href="{% url 'admissions' %}" data-track-action="cta" data-track-label="Footer Admissions">Admissions</a></p>
+                <p><a href="{% url 'careers' %}" data-track-action="cta" data-track-label="Footer Careers">Careers</a></p>
+                <p><a href="{% url 'news_list' %}" data-track-action="cta" data-track-label="Footer News">News</a></p>
+                <p><a href="{% url 'contact' %}" data-track-action="cta" data-track-label="Footer Contact">Contact</a></p>
+            </div>
+            <div>
+                <h4>Social</h4>
+                <div class="social-links">
+                    {% if site.facebook %}
+                        <a class="social-link" href="{{ site.facebook }}" target="_blank" rel="noopener" aria-label="Follow us on Facebook" data-track-action="social" data-track-label="Facebook">
+                            <img class="social-icon-img" src="{% static 'images/social/facebook.svg' %}" alt="Facebook">
+                        </a>
+                    {% endif %}
+                    {% if site.instagram %}
+                        <a class="social-link" href="{{ site.instagram }}" target="_blank" rel="noopener" aria-label="Follow us on Instagram" data-track-action="social" data-track-label="Instagram">
+                            <img class="social-icon-img" src="{% static 'images/social/instagram.svg' %}" alt="Instagram">
+                        </a>
+                    {% endif %}
+                    {% if site.youtube %}
+                        <a class="social-link" href="{{ site.youtube }}" target="_blank" rel="noopener" aria-label="Subscribe on YouTube" data-track-action="social" data-track-label="YouTube">
+                            <img class="social-icon-img" src="{% static 'images/social/youtube.svg' %}" alt="YouTube">
+                        </a>
+                    {% endif %}
+                    {% if site.tiktok %}
+                        <a class="social-link" href="{{ site.tiktok }}" target="_blank" rel="noopener" aria-label="Follow us on TikTok" data-track-action="social" data-track-label="TikTok">
+                            <img class="social-icon-img" src="{% static 'images/social/tiktok.svg' %}" alt="TikTok">
+                        </a>
+                    {% endif %}
+                    {% if site.linkedin %}
+                        <a class="social-link" href="{{ site.linkedin }}" target="_blank" rel="noopener" aria-label="Follow us on LinkedIn" data-track-action="social" data-track-label="LinkedIn">
+                            <img class="social-icon-img" src="{% static 'images/social/linkedin.svg' %}" alt="LinkedIn">
+                        </a>
+                    {% endif %}
+                    {% if site.twitter %}
+                        <a class="social-link" href="{{ site.twitter }}" target="_blank" rel="noopener" aria-label="Follow us on Twitter" data-track-action="social" data-track-label="Twitter">
+                            <img class="social-icon-img" src="{% static 'images/social/twitter.svg' %}" alt="Twitter">
+                        </a>
+                    {% endif %}
+                    {% if site.pinterest %}
+                        <a class="social-link" href="{{ site.pinterest }}" target="_blank" rel="noopener" aria-label="Follow us on Pinterest" data-track-action="social" data-track-label="Pinterest">
+                            <img class="social-icon-img" src="{% static 'images/social/pinterest.svg' %}" alt="Pinterest">
+                        </a>
+                    {% endif %}
+                    {% if site.whatsapp_url %}
+                        <a class="social-link" href="{{ site.whatsapp_url }}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-track-action="whatsapp" data-track-label="Footer WhatsApp">
+                            <img class="social-icon-img" src="{% static 'images/social/whatsapp.svg' %}" alt="WhatsApp">
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <span>© {% now 'Y' %} {{ site.school_name|default:'Prime Choice Kids Care' }}</span>
+            <span>All Rights Reserved</span>
+            <span>Built with Elechemobiophy.</span>
+        </div>
+    </footer>
+
+    <div class="floating-actions" aria-label="Quick contact actions">
+        {% if site.whatsapp_phone %}
+            <a class="fab fab-whatsapp" href="https://wa.me/{{ site.whatsapp_phone|cut:'+'|cut:' ' }}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" data-track-action="whatsapp" data-track-label="Floating WhatsApp">
+                WhatsApp
+            </a>
+        {% endif %}
+        {% if site.phone1 %}
+            <a class="fab fab-call" href="tel:{{ site.phone1 }}" aria-label="Call school phone number" data-track-action="call" data-track-label="Floating Call">
+                Call Now
+            </a>
+        {% endif %}
+    </div>
+</div>
+<script>
+    const body = document.body;
+    const loader = document.querySelector('[data-page-loader]');
+
+    const hideLoader = () => {
+        body.classList.remove('is-loading');
+        if (loader) {
+            loader.classList.add('is-hidden');
+        }
+    };
+
+    window.addEventListener('load', () => {
+        setTimeout(hideLoader, 550);
+    });
+
+    document.addEventListener('click', (event) => {
+        const anchor = event.target.closest('a[href]');
+        if (!anchor) {
+            return;
+        }
+
+        const href = anchor.getAttribute('href') || '';
+        const isSameWindow = !anchor.target || anchor.target === '_self';
+        const isEligible = href && isSameWindow && href.startsWith('/') && !href.startsWith('//') && !href.includes('#');
+        if (!isEligible) {
+            return;
+        }
+
+        event.preventDefault();
+        body.classList.add('page-leave');
+        setTimeout(() => {
+            window.location.href = href;
+        }, 220);
+    });
+
+    const navToggle = document.querySelector('[data-nav-toggle]');
+    const siteNav = document.querySelector('[data-site-nav]');
+    if (navToggle && siteNav) {
+        navToggle.addEventListener('click', () => siteNav.classList.toggle('is-open'));
+    }
+
+    const revealTargets = document.querySelectorAll('.panel, .content-card, .quote-card, .gallery-card, .section-head, .hero-copy, .hero-card');
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealTargets.forEach((el, index) => {
+            el.classList.add('reveal-item');
+            el.style.setProperty('--reveal-delay', `${Math.min(index * 40, 280)}ms`);
+            revealObserver.observe(el);
+        });
+    } else {
+        revealTargets.forEach((el) => el.classList.add('is-visible'));
+    }
+
+    const counterItems = document.querySelectorAll('.counter-number[data-counter-value]');
+    const animateCounter = (el) => {
+        const target = Number(el.dataset.counterValue || 0);
+        if (!Number.isFinite(target) || target <= 0) {
+            el.textContent = target || 0;
+            return;
+        }
+        const duration = 1400;
+        const start = performance.now();
+
+        const tick = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * eased).toLocaleString();
+            if (progress < 1) {
+                requestAnimationFrame(tick);
+            }
+        };
+
+        requestAnimationFrame(tick);
+    };
+
+    if ('IntersectionObserver' in window && counterItems.length > 0) {
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        counterItems.forEach((el) => counterObserver.observe(el));
+    } else {
+        counterItems.forEach((el) => animateCounter(el));
+    }
+
+    const trackingUrl = "{% url 'track_click' %}";
+    const trackableLinks = document.querySelectorAll('[data-track-action]');
+    const sendTracking = (payload) => {
+        if (navigator.sendBeacon) {
+            const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+            navigator.sendBeacon(trackingUrl, blob);
+            return;
+        }
+
+        fetch(trackingUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            keepalive: true,
+        }).catch(() => {});
+    };
+
+    trackableLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+            sendTracking({
+                action_type: link.dataset.trackAction || 'cta',
+                label: link.dataset.trackLabel || link.textContent.trim(),
+                target_url: link.getAttribute('href') || '',
+                source_page: window.location.pathname,
+            });
+        });
+    });
+</script>
+</body>
+</html>

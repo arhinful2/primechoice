@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="LinkedIn icon">
+  <circle cx="32" cy="32" r="32" fill="#0A66C2"/>
+  <circle cx="22" cy="21" r="4" fill="#FFFFFF"/>
+  <rect x="18" y="28" width="8" height="20" fill="#FFFFFF"/>
+  <path d="M32 28h7v3.2c1.2-2.2 3.7-4.2 7.4-4.2 7 0 8.6 4.4 8.6 11.3V48h-8V39c0-3.1-.1-7-4.3-7-4.3 0-5 3.4-5 6.8V48h-7.7V28z" fill="#FFFFFF"/>
+</svg>

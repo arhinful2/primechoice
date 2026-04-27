@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Message sent | {{ site.school_name }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container narrow">
+        <span class="eyebrow">Thank you</span>
+        <h1>We received your message</h1>
+        <p>Someone from the school will reply as soon as possible.</p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="{% url 'home' %}">Back to home</a>
+            <a class="btn btn-secondary" href="{% url 'contact' %}">Send another message</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
