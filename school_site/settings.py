@@ -8,7 +8,18 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-REPLACE-WITH-YOUR-OWN-SECR
 
 DEBUG = os.getenv('DEBUG', 'True').lower() in ['true', '1', 'yes']
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+_env_allowed = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1')
+# Split, strip and ignore empty entries
+ALLOWED_HOSTS = [h.strip() for h in _env_allowed.split(',') if h.strip()]
+
+# Always allow Vercel preview and deploy domains (any subdomain of vercel.app)
+if '.vercel.app' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('.vercel.app')
+
+# Also allow localhost variants for local testing if not present
+for local_host in ('localhost', '127.0.0.1'):
+    if local_host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(local_host)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
