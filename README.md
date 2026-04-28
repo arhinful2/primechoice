@@ -45,7 +45,7 @@ primechoice_school/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/primechoice.git
+   git clone https://github.com/arhinful2/primechoice.git
    cd primechoice
    ```
 
